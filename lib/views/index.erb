@@ -1,0 +1,19 @@
+<article>
+  <h1>Right or not!</h1>
+  <section>
+    <h2>Create your list</h2>
+    <form action="/list" method="post" enctype="multipart/form-data">
+      <div>
+        <label for="title">Title of your questionary</label>
+        <input type="text" name="title" id="title" required>
+      </div>
+      <div>
+        <label for="pairs">File with the list of questions and answers</label>
+        <input type="file" name="pairs" id="pairs" required>
+      </div>
+      <div>
+        <input type="submit">
+      </div>
+    </form>
+  </section>
+</article>

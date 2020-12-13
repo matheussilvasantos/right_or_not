@@ -1,0 +1,42 @@
+<article>
+  <h1>Type the right answer</h1>
+  <section>
+    <h2 class="js-question"></h2>
+    <form class="js-pair">
+      <input class="js-pair-inserted" type="text">
+      <input type="submit">
+    </form>
+  </section>
+</article>
+<script>
+  var pairs = {
+    <% @list.pairs.each do |pair| %>
+      "<%= pair.question %>": "<%= pair.answer %>",
+    <% end %>
+  };
+  
+  function randomProperty(obj) {
+    var keys = Object.keys(obj);
+    var key = keys[ keys.length * Math.random() << 0]
+    var randomObject = {};
+    randomObject[key] = obj[key];
+    return randomObject;
+  };
+  
+  document.querySelector(".js-pair").addEventListener("submit", function(e) {
+    e.preventDefault();
+    var word = document.querySelector(".js-question").innerText;
+    var pairInserted = document.querySelector(".js-pair-inserted").value;
+    var rightPair = pairs[word];
+    if(rightPair == pairInserted) {
+      console.log("you're right");
+      var newWord = randomProperty(pairs);
+      document.querySelector(".js-question").innerText = Object.keys(newWord)[0];
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var newWord = randomProperty(pairs);
+    document.querySelector(".js-question").innerText = Object.keys(newWord)[0];
+  });
+</script>
