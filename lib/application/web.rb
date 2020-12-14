@@ -16,11 +16,20 @@ configure do
   set :views, "lib/views"
 end
 
+helpers do
+  def stage_path
+    stage = ENV["STAGE"]
+    return if stage.nil? || stage.empty?
+
+    "/#{stage}"
+  end
+end
+
 get "/" do
   erb :index
 end
 
-post "/list" do
+post "/lists" do
   title = params[:title]
 
   file_content = params.dig(:pairs, :tempfile).read
@@ -33,7 +42,7 @@ post "/list" do
   repository = ListRepository.new
   repository.save_list(list)
 
-  redirect to("/list/#{list.slug}")
+  redirect to("#{stage_path}/list/#{list.slug}")
 end
 
 get "/list/:slug" do
