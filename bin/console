@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/init"
+
+require "domain/list"
+require "domain/pair"
+require "domain/list_repository"
+
+require "irb"
+
+IRB.start

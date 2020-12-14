@@ -8,6 +8,8 @@ require "application/helpers/view"
 require "domain/pair"
 require "domain/list"
 
+require "domain/list_repository"
+
 include Helpers::View
 
 configure do
@@ -26,12 +28,16 @@ post "/list" do
     Pair.new(question: question, answer: answer)
   end
 
-  @list = List.new(title: title, pairs: pairs)
+  list = List.new(title: title, pairs: pairs)
 
-  erb :list
-  #redirect to("/list/#{@list.slug}")
+  repository = ListRepository.new
+  repository.save_list(list)
+
+  redirect to("/list/#{list.slug}")
 end
 
 get "/list/:slug" do
+  repository = ListRepository.new
+  @list = repository.find_list_by_slug(params[:slug])
   erb :list
 end

@@ -5,4 +5,11 @@ class Pair
     @question = question
     @answer = answer
   end
+
+  def to_h
+    {
+      question: question,
+      answer: answer
+    }
+  end
 end

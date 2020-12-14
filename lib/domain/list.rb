@@ -5,9 +5,9 @@ class List
 
   attr_reader :slug, :title, :pairs
 
-  def initialize(title:, pairs:)
+  def initialize(slug: nil, title:, pairs:)
     @title = title
     @pairs = pairs
-    @slug = parameterize(title)
+    @slug = slug || parameterize(title)
   end
 end
